@@ -3,7 +3,7 @@ import Board from './board';
 import calculateWinner from './calculateWinner';
 
 class Game extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             history: [{
@@ -14,7 +14,7 @@ class Game extends React.Component {
         };
     }
 
-    handleClick(i){
+    handleClick(i) {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[history.length - 1];
         const squares = current.squares.slice();
@@ -40,9 +40,9 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
-        const moves = history.map((step,move) => {
+        const moves = history.map((step, move) => {
             const desc = move ? 'Go to move #' + move : 'Go to game start';
-            return(
+            return (
                 <li key={move}>
                     <button onClick={() => this.jumpTo(move)}>{desc}</button>
                 </li>
@@ -50,16 +50,16 @@ class Game extends React.Component {
         });
 
         let status;
-        if(winner) {
+        if (winner) {
             status = 'Winner: ' + winner;
-        }else {
+        } else {
             status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
         }
 
         return (
             <div className="game">
                 <div className="game-board">
-                    <Board squares = {current.squares} onClick = {(i) => this.handleClick(i)}/>
+                    <Board squares={current.squares} onClick={(i) => this.handleClick(i)}/>
                 </div>
                 <div className="game-info">
                     <div>{status}</div>
